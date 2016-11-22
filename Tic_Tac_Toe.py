@@ -1,5 +1,11 @@
-import sys
+# Tic Tac Toe Game
+# To be played through the terminal
+# Input must be coordinates in the form of x, y
+# 1 determines the first line 
 
+import sys # To use sys.stdout to print without endline
+
+# Draw the game board
 def Draw (game):
   ceil = " ---"
   side = "|"
@@ -11,11 +17,8 @@ def Draw (game):
         sys.stdout.flush()
       print side
 
-#v, h = raw_input().split("x")
 
-#Draw (int(v), int(h))
-
-
+# Check if the query is X or O
 def isEqual(query, p1, p2):
   if query == 'X':
     p1 = p1 + 1
@@ -23,6 +26,8 @@ def isEqual(query, p1, p2):
     p2 = p2 + 1
   return (p1, p2)
 
+
+# Check if a player reached 3
 def checker(p1, p2):
   if p1 == 3:
     return (1, 0)
@@ -30,6 +35,7 @@ def checker(p1, p2):
     return (0, 2)
   return (0, 0)
 
+# Check if a player won
 def If_won(game):
   p1 = 0
   p2 = 0
@@ -54,6 +60,7 @@ def If_won(game):
     (p1, p2) = isEqual(game[m][m], p1, p2)
   return checker(p1, p2)
 
+# Count the number of empty fields in the board
 def Count(lst):
   c = 0
   for i in range(0, 3):
@@ -62,6 +69,7 @@ def Count(lst):
           c = c + 1
   return c
 
+# Declare the winner
 def finish(game):
   (p1, p2) = If_won(game)
   if (p1 == 1):
@@ -72,29 +80,39 @@ def finish(game):
       return True
   return False
 
+# Play the game
 def handle_input():
   game = [[' ', ' ', ' '],
           [' ', ' ', ' '],
           [' ', ' ', ' ']]
+
   print "Player1 is X, Player2 is O"
+  
   Draw(game)
+  
   while Count(game) != 0:
     flag = False
     (p1, p2) = If_won(game);
+  
     while flag == False and (p1, p2) == (0, 0):
       row, column = raw_input("Player1--> Enter coordinates for X: ").split(", ")
       row, column = int(row), int(column)
+
       if game[row - 1][column - 1] == ' ':
         game[row - 1][column - 1] = 'X'
         flag = True
       else:
         print ("Position already in use, try again!")
+
     Draw(game)
+
     if finish(game):
       break
     if Count(game) == 0:
       break
+    
     flag = False
+
     while flag == False:
       row, column = raw_input("Player2--> Enter coordinates for O: ").split(", ")
       row, column = int(row), int(column)
@@ -103,11 +121,12 @@ def handle_input():
         flag = True
       else:
         print ("Position already in use, try again!")
+
       Draw(game)
+
     if finish(game):
         break
 
 handle_input()
 
-# TODO: Stop the game when one player wins
 
