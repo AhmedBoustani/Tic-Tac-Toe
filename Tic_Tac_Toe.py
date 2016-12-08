@@ -1,11 +1,3 @@
-# Tic Tac Toe Game
-# To be played through the terminal
-# Input must be coordinates in the form of x, y
-# 1 determines the first line 
-
-# TODO: Parse the program to small python scripts
-# TODO: Implement a GUI
-
 import sys # To use sys.stdout to print without endline
 
 # Draw the game board
